@@ -12,9 +12,11 @@ foreach ($Password in $PasswordInput)
 
     $Split = $Password -Split {$Delimiters -contains $_}
 
-    $FirstPosition = $Split[0]
+    $FirstPosition = $Split[0] -as [int]
+    $FirstPosition--
 
-    $SecondPosition = $Split[1]
+    $SecondPosition = $Split[1] -as [int]
+    $SecondPosition--
 
     $Symbol = $Split[2]
 
@@ -27,7 +29,7 @@ foreach ($Password in $PasswordInput)
     }
     elseif ($Userpass[$FirstPosition] -ne $Symbol -and $UserPass[$SecondPosition] -ne $symbol)
     {
-        Write-Output "Userpass is invalid! NEITHER and $SecondPosition are $symbol"
+        Write-Output "Userpass is invalid! NEITHER $FirstPosition and $SecondPosition are $symbol"
         $NotMatchingPasswords ++
     }
     elseif ($Userpass[$FirstPosition] -eq $Symbol -or $UserPass[$SecondPosition] -eq $symbol)
